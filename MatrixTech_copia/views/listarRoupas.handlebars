@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Roupas Disponíveis</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(
+                135deg,
+                #ffe4ef,
+                #ffc1d9,
+                #ffb0d0
+            );
+
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            padding-bottom: 50px;
+        }
+
+        /* Cabeçalho */
+        .topo-loja {
+
+            position: relative;
+
+            background-color: #c23262;
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: white;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .topo-loja h1 {
+            font-size: 32px;
+
+            font-family: cursive;
+        }
+
+        .topo-loja .carrinho {
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 28px;
+        text-decoration: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+}
+
+        /* Menu */
+        .menu {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin: 30px auto;
+
+            flex-wrap: wrap;
+        }
+
+        .menu a {
+            background-color: #c2185b;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 12px 20px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #ad1457;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 12px rgba(173, 20, 87, 0.3);
+        }
+
+        /* Área dos cards */
+        #divPrincipal {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 12px;
+            text-align: center;
+
+            box-shadow: 0 4px 12px rgba(194, 24, 91, 0.20);
+            border: 2px solid #f48ab5;
+
+            width: 100%;
+            height: 400px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #f48ab5;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 10px 25px rgba(194, 24, 91, 0.30);
+        }
+
+        
+        .sem-imagem {
+            width: 100%;
+
+            height: 220px;
+
+            background-color: #fce4ec;
+
+            border-radius: 15px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            color: #c2185b;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        
+        .card h2 {
+            color: #c2185b;
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+        
+        .card p {
+            color:  #ad1649;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin: 8px 0;
+        }
+
+        .info {
+            color: #ad1649;
+
+        
+        }
+
+        .valor {
+            color: #c2185b !important;
+
+            font-size: 20px !important;
+
+            font-weight: bold;
+
+            margin-top: 15px !important;
+        }
+
+        .botoes {
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .botoes a,
+.botoes button {
+    border: none;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    flex: 1;
+}
+
+        
+        .editar {
+            background-color: #ad1457;
+        }
+
+        .editar:hover {
+            background-color: #ad1457;
+        }
+
+        
+        .excluir {
+            background-color: #630606;
+        }
+
+        .excluir:hover {
+            background-color: #630606;
+        } 
+
+       
+        .form-excluir {
+            display: inline;
+        }
+
+        
+        .sem-roupas {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            background-color: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            color: #c2185b;
+
+            font-size: 20px;
+
+            box-shadow:
+                0 6px 18px rgba(194, 24, 91, 0.20);
+        }
+
+        .carrinho {
+            background-color: #af4c91;
+        }
+        .carrinho:hover {
+            background-color: #af4c91;
+        }
+
+        @media (max-width: 600px) {
+
+        .topo-loja h1 {
+            font-size: 27px;
+        }
+
+        #divPrincipal {
+            width: 95%;
+            grid-template-columns: 1fr;
+        }
+
+        .card {
+            height: 500px;
+        }
+
+        .card img,
+        .sem-imagem {
+            height: 250px;
+        }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header class="topo-loja">
+        <h1>Roupas Disponíveis</h1>
+        <a href="/carrinho" class="carrinho">
+             🛒
+        </a>
+    </header>
+
+    <nav class="menu">
+
+        <a href="/roupas/cadastrar">
+            Cadastrar Roupa
+        </a>
+
+        <a href="/">
+            Home
+        </a>
+
+    </nav>
+
+    <main id="divPrincipal">
+
+        {{#if roupas}}
+
+            {{#each roupas}}
+
+                <div class="card">
+
+                    {{#if this.imagem}}
+
+                        <img
+                            src="{{this.imagem}}"
+                            alt="{{this.peca}}"
+                        >
+
+                    {{else}}
+
+                        <div class="sem-imagem">
+                            Sem imagem
+                        </div>
+
+                    {{/if}}
+
+                    <h2>
+                        {{this.peca}}
+                    </h2>
+
+                    <p>
+                        <span class="info">
+                            Tecido:
+                        </span>
+
+                        {{this.tecido}}
+                    </p>
+
+                    <p class="valor">
+                        R$ {{this.valor}}
+                    </p>
+
+                    
+
+                       <div class="botoes">
+
+    <a
+        class="editar"
+        href="/roupas/{{this.id}}/editar"
+    >✏️Editar</a>
+
+    <form
+        class="form-excluir"
+        action="/roupas/excluir/{{this.id}}"
+        method="post"
+    >
+        <button
+            class="excluir"
+            type="submit"
+        >🗑️Excluir</button>
+    </form>
+
+    <form
+        action="/carrinho/adicionar"
+        method="POST"
+    >
+        <input
+            type="hidden"
+            name="roupaId"
+            value="{{this.id}}"
+        >
+
+        <button
+            type="submit"
+            class="carrinho"
+        >
+            🛒 Adicionar
+        </button>
+    </form>
+
+</div>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            {{/each}}
+
+        {{else}}
+
+            <div class="sem-roupas">
+                Nenhuma roupa cadastrada.
+            </div>
+
+        {{/if}}
+
+    </main>
+
+</body>
+
+</html>
